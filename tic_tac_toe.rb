@@ -1,9 +1,18 @@
 class Board
   def initialize
-    @board = [[" ", " ", " "],[" ", " ", " "],[" ", " ", " "]]
+    @board = Array.new(3) { Array.new(3, " ")}
   end
 
   def print_board
+    # puts @board[1][1]
+    (0..2).each do |r|
+      (0..2).each do |c|
+        print @board[r][c]
+        print " | " unless c == 2
+      end
+      puts "\n- - - - -" unless r == 2
+    end
+    print "\n"
   end
 
 end
@@ -30,27 +39,26 @@ class Game
 
   def show_instructions
     puts "Press the corresponding number to place your marker",
-         "7 | 8 | 9",
-         "- - - - -",
-         "4 | 5 | 6",
-         "- - - - -",
-         "1 | 2 | 3",
+         "   7 | 8 | 9",
+         "   - - - - -",
+         "   4 | 5 | 6",
+         "   - - - - -",
+         "   1 | 2 | 3",
          "First to get a line of 3 wins"
   end
 
   def start_game
-    puts "Would you like to play Tic Tac Toe? (y/n)"
-    gets.chomp == "y" ? self.show_instructions : start_game
+    puts "Welcome to Tic Tac Toe"
     @player = Player.new
     @comp_symbol = @player.symbol == "X" ? "O" : "X"
+    self.show_instructions
     puts @player.symbol == "X" ? "You go first" : "Computer goes first"
+    # @game_board.print_board
   end
 
   def is_winner
   end
 
-  def is_tie
-  end
 end
 
 Game.main
