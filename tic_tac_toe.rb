@@ -58,7 +58,7 @@ class Game
       @current_player = @current_player == "X" ? "O" : "X"
     #   @game_board.print_board
     end
-    if is_winner == "X" || "O"
+    if is_winner == "X" || is_winner == "O"
       puts "#{is_winner} is the winner"
       puts is_winner == @p_marker ? "Congratulations" : "Better luck next time"
     else
@@ -105,6 +105,8 @@ class Game
       if valid_input(position)
         coords = convert_to_array_value(position.to_i)
         good_input = true if is_empty?(coords)
+      else
+        show_instructions
       end
     end
     @game_board.board[coords[0]][coords[1]] = marker
@@ -135,7 +137,7 @@ class Game
     when 9
       return [0,2]
     else
-      puts "Invalid Input"
+      show_instructions
     end
   end
 
